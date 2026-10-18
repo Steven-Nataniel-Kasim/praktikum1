@@ -28,6 +28,7 @@ const alertBox = document.getElementById("alert-box");
 const tabelBody = document.getElementById("tabel-body-mahasiswa");
 const totalBadge = document.getElementById("total-mahasiswa-badge");
 const totalInfo = document.getElementById("total-mahasiswa-info");
+const inputSearch = document.getElementById("input-search");
 
 
 // Seleksi Elemen Formulir Tambah Mahasiswa
@@ -68,11 +69,13 @@ function updateCounter(displayedCount,totalCount = dataMahasiswa.length) {
 function renderTable(data = dataMahasiswa) {
     if (!tabelBody) return;
 
-    // Percobaan 3-2 langkah 6
+    tabelBody.innerHTML = "";
 
     if (data.length === 0) {
        
-        // Percobaan 3-2 langkah 7
+        tabelBody.innerHTML = '<tr><td colspan="8">Tidak ada data mahasiswa.</td></tr>';
+        updateCounter(0);
+        return;
        
     }
 
@@ -141,13 +144,10 @@ function renderTable(data = dataMahasiswa) {
 if (formTambah) {
     formTambah.addEventListener("submit", function (event) {
         event.preventDefault();
-        // Percobaan 3-4 Langkah 4
-
-        // Percobaan 3-4 Langkah 5
-
+     
         const npm = inputNpm.value.trim();
         const nama = inputNama.value.trim();
-        const prodi = inputProdi.value;
+        const prodi = selectProdi.value;
         const angkatan = inputAngkatan.value;
         const email =inputEmail.value.trim();
 
@@ -161,7 +161,7 @@ if (formTambah) {
             
         }
 const mahasiswaBaru = {
-            nim,
+            npm,
             nama,
             program_studi: prodi,
             angkatan: parseInt(angkatan, 10),
@@ -187,7 +187,7 @@ function hapusMahasiswa(npm) {
     if(konfirmasi) {
         dataMahasiswa = dataMahasiswa.filter(item => item.npm !== npm);
         renderTable(dataMahasiswa);
-        showAlert(`Data mahasiswa ${mhs.nama} (${mhs.npm}) berhasil dihapus.`, "success");
+        showAlert(`Data mahasiswa ${mhs.nama} (${mhs.npm}) berhasil dihapus.`, "info");
     }
 }
 
@@ -218,3 +218,5 @@ document.addEventListener(
        renderTable(dataMahasiswa);
     }
 )
+
+
