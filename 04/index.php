@@ -14,7 +14,7 @@ $total_semua = count_total_mahasiswa();
 // Ambil keyword pencarian jika ada
 $keyword = isset($_GET['search']) ? sanitize($_GET['search']) : '';
 $daftar_mahasiswa = get_all_mahasiswa($keyword);
-$total_tampil = ;
+$total_tampil = count($daftar_mahasiswa);
 
 // Percobaan 4-4 Langkah 2
 $keyword = isset($_GET['search']) ? trim($_GET['search']) : '';
